@@ -11,8 +11,11 @@ body{
     /*repete o comando 3x (3 linhas da tabela)// comando minmax minimo 100px, maximo vai ajustar automatico dependendo do conteudo// 50px repeat(3, minmax(100px, auto)) 100px = quer dizer que a 1ª linha tem 50px, as 3 depois vai ter essa configuracao e a ultima linha tem 100px;*/
     grid-template-rows: repeat(3, minmax(100px, auto));
 
-    /* Define que a primeira linha vai ser completamente header, isso faz com que o conteudo nao quebre nas colunas, vai ser como um banner*/
-    grid-template-areas: "header header header header header";
+    /* Define que a primeira linha vai ser completamente header, isso faz com que o conteudo nao quebre nas colunas, vai ser como um banner// Segunda linha inteira vai ser main*/
+    grid-template-areas: 
+    "header header header header header"
+    "sidebar sidebar sidebar sidebar sidebar"
+    "main main main main main";
 }
 
 /* Confura como vai ser a aplicacao de estilo do header que vc definiu*/
@@ -40,7 +43,7 @@ header nav a {
     align-items: center;
     cursor: pointer;
     display: flex;
-    /* por padrao é row, mas o display felx faz ficar uma encima da outra, dai coloca autera o flex direction colum para voltar a ser como antes */
+    /* por padrao é row (linhas), mas o display flex faz ficar uma do lado da outra, dai coloca altera o flex direction colum para voltar a ser como antes (uma em cima da outra-linhas) */
     flex-direction: column;
     justify-content: center;
     width: 25px;
@@ -54,12 +57,35 @@ header nav a {
     width: 100%;
 }
 
+/* Coloca para o menu "desaparecer" e ficar so o hamburger. Colocar como ultima config do header*/
 header nav {
     display: none;
 
 }
 
-/* Media query = quando a tela tiver maior que 900px esse estilo é aplicado. Tem que sempre ficar no fim do codigo css pra se sobrepor. A logica é codar o estilo de mobile primeiro e a partir do midia query a aplicacao para grandes telas de computador, a partir de 900px*/
+.sidebar{
+    display: flex;
+    grid-area: sidebar;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 30px 0;
+
+}
+
+.sidebar nav{
+    display:flex;
+    justify-content: space-between;
+    width: 400px;
+   
+}
+
+main{
+    grid-area: main;
+}
+
+/* Media query = quando a tela tiver maior que 900px esse estilo é aplicado. Tem que sempre ficar no fim do codigo css pra se sobrepor. A logica é codar o estilo de mobile primeiro e a partir do midia query a aplicacao para grandes telas de computador, a partir de 900px
+
 @media(min-width: 900px){
     header nav{
         display: block;
@@ -71,3 +97,56 @@ header nav {
 
     }
 }
+*/
+
+/*Breakpoint para tablet */
+@media(min-width: 768px){
+    header nav{
+        display: block;
+    }
+    
+    
+    .menu-hamburger{
+        display: none;
+
+    }
+}
+
+/*Breakpoint para notebooks pequenos */
+@media(min-width: 992px){
+    .grid {
+grid-template-areas: 
+"header header header header header"
+"main main main . sidebar"
+"main main main . sidebar";
+
+    }
+
+    .sidebar{
+        justify-content: center;
+        align-items: center;
+        border-radius: 25px;
+        box-shadow: 1px 1px 15px 2px black;
+        width: 200px;
+
+    }
+
+    .sidebar nav{
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+/*Breakpoint para notebooks grandes e desktops */
+@media(min-width: 1200px){
+   main{
+       /* margin: auto Centraliza o elemento*/
+       margin: auto;
+       /* maximo de largura apresentado na tela do computador*/
+       max-width: 1200px;
+   }
+    }
+}
+
+ n
