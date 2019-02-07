@@ -1,0 +1,73 @@
+/* */
+
+body{
+    background-color: lightblue;
+    margin: 0;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: (repeat(5, 1fr));
+    /*repete o comando 3x (3 linhas da tabela)// comando minmax minimo 100px, maximo vai ajustar automatico dependendo do conteudo// 50px repeat(3, minmax(100px, auto)) 100px = quer dizer que a 1ª linha tem 50px, as 3 depois vai ter essa configuracao e a ultima linha tem 100px;*/
+    grid-template-rows: repeat(3, minmax(100px, auto));
+
+    /* Define que a primeira linha vai ser completamente header, isso faz com que o conteudo nao quebre nas colunas, vai ser como um banner*/
+    grid-template-areas: "header header header header header";
+}
+
+/* Confura como vai ser a aplicacao de estilo do header que vc definiu*/
+header {
+    align-items: center;
+    display: flex;
+    grid-area: header;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+/* Chama os filhos na sequencia e o nth-child chama o item na ordem que vc quiser do ultimo elemento chamado e estiliza o q vc configurar// Nesse caso estiliza só o 1º <a> dentro da <nav>*/
+header nav a:nth-child(1){
+    font-size: 14pt;
+}
+
+/* configura TODOS elementos <a> dentro da <nav>*/
+header nav a {
+
+    font-size: 15pt; 
+}
+
+
+.menu-hamburger{
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    /* por padrao é row, mas o display felx faz ficar uma encima da outra, dai coloca autera o flex direction colum para voltar a ser como antes */
+    flex-direction: column;
+    justify-content: center;
+    width: 25px;
+}
+
+.traco{
+    background-color: black;
+    border-radius: 10px;
+    height: 3px;
+    margin: 3px 0;
+    width: 100%;
+}
+
+header nav {
+    display: none;
+
+}
+
+/* Media query = quando a tela tiver maior que 900px esse estilo é aplicado. Tem que sempre ficar no fim do codigo css pra se sobrepor. A logica é codar o estilo de mobile primeiro e a partir do midia query a aplicacao para grandes telas de computador, a partir de 900px*/
+@media(min-width: 900px){
+    header nav{
+        display: block;
+    }
+    
+    
+    .menu-hamburger{
+        display: none;
+
+    }
+}
